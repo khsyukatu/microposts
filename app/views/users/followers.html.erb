@@ -1,0 +1,15 @@
+<div class="row">
+  <% @followers.each do |follower| %>
+  <aside class="col-md-4">
+    <%= link_to user_path(follower) do %>
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for follower %>
+        <%= follower.name %>
+      </h1>
+    </section>
+    <% end %>
+    <%= render partial: 'follow_form', locals: { user: follower } %>
+  </aside>
+  <% end %>
+</div>

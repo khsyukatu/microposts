@@ -41,6 +41,7 @@ class UsersController < ApplicationController
   end
   
   def followers
+    @followers = current_user.follower_users
   end
   
   private

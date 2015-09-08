@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
     
   get 'users/followings' => "users#followings"
+  get 'users/followers' => "users#followers"
   
   resources :users
   resources :microposts
