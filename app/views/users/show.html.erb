@@ -7,28 +7,53 @@
         <%= @user.name %>
       </h1>
     </section>
+    <div class="row">
+      <div class="col-md-6">
+        <%= link_to user_followings_path(@user) do %>
+          <div class="panel panel-primary text-center">
+            <div class="panel-heading">
+              <h3 class="panel-title">following</h3>
+            </div>
+            <div class="panel-body">
+              <%= @user.following_users.size %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= link_to user_followers_path(@user) do %>
+          <div class="panel panel-primary text-center">
+            <div class="panel-heading">
+              <h3 class="panel-title">follower</h3>
+            </div>
+            <div class="panel-body">
+              <%= @user.follower_users.size %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
     <div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">User Profile</h3>
-  </div>
-  <div class="panel-body">
-    Profile: <%= @user.profile %>
-  </div>
-  <div class="panel-body">
-    Location: <%= @user.location %>
-  </div>
-  <div class="panel-body">
-    Url: <%= link_to @user.url %>
-  </div>
-</div>
-<p>
-  <% if logged_in? %>
-    <% if current_user == @user %>
-      <%= link_to "編集する", edit_user_path(@user) %>
-    <% end %>
-  <% end %>
-</p>
-
+      <div class="panel-heading text-center">
+        <h3 class="panel-title">User Profile</h3>
+      </div>
+      <div class="panel-body">
+        Profile: <%= @user.profile %>
+      </div>
+      <div class="panel-body">
+        Location: <%= @user.location %>
+      </div>
+      <div class="panel-body">
+        Url: <%= link_to @user.url %>
+      </div>
+    </div>
+    <p>
+      <% if logged_in? %>
+        <% if current_user == @user %>
+          <%= link_to "編集する", edit_user_path(@user) %>
+        <% end %>
+      <% end %>
+    </p>
   </aside>
   <div class="col-md-8">
     <% if logged_in? %>
