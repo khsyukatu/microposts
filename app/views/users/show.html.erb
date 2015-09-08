@@ -1,3 +1,4 @@
+
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
@@ -6,6 +7,28 @@
         <%= @user.name %>
       </h1>
     </section>
+    <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">User Profile</h3>
+  </div>
+  <div class="panel-body">
+    Profile: <%= @user.profile %>
+  </div>
+  <div class="panel-body">
+    Location: <%= @user.location %>
+  </div>
+  <div class="panel-body">
+    Url: <%= link_to @user.url %>
+  </div>
+</div>
+<p>
+  <% if logged_in? %>
+    <% if current_user == @user %>
+      <%= link_to "編集する", edit_user_path(@user) %>
+    <% end %>
+  <% end %>
+</p>
+
   </aside>
   <div class="col-md-8">
     <% if logged_in? %>

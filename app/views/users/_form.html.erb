@@ -6,6 +6,12 @@
       <%= f.text_field :name %>
       <%= f.label :email %>
       <%= f.text_field :email %>
+      <%= f.label :location %>
+      <%= f.select :location, [["日本", "Japan"], ["アメリカ", "America"], ["中国", "china"], ["韓国", "Korea"], ["オーストラリア", "Australia"], ["その他", "Other"]], :selected => "日本" %>
+      <%= f.label :url %>
+      <%= f.text_field :url, placeholder:"例：http://message-boardforkhsyukatu.herokuapp.com/" %>
+      <%= f.label :profile %>
+      <%= f.text_area :profile, placeholder:"150文字以内でご記入ください。" %>
       <%= f.label :password %>
       <%= f.password_field :password %>
       <%= f.label :password_confirmation, "Confirmation" %>

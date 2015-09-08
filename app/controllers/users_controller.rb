@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:followings, :followers]
+  before_action :logged_in_user, only: [:followings, :followers, :edit, :update]
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts
@@ -20,15 +20,11 @@ class UsersController < ApplicationController
   end
   
   def edit
-    unless logged_in?
-      redirect_to login_path
-    else
-      @user = User.find(params[:id])
-    end
+    @user = current_user
   end
   
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update(user_params)
       redirect_to @user, notice: 'ユーザー情報を編集しました。'
     else
@@ -50,7 +46,7 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :location, :url, :profile)
   end
   
 end
