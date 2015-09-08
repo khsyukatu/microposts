@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update]
+  
   def show
     @user = User.find(params[:id])
   end
@@ -18,15 +20,11 @@ class UsersController < ApplicationController
   end
   
   def edit
-    unless logged_in?
-      redirect_to login_path
-    else
-      @user = User.find(params[:id])
-    end
+    @user = current_user
   end
   
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update(user_params)
       redirect_to @user, notice: 'ユーザー情報を編集しました。'
     else
