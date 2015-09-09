@@ -1,22 +1,44 @@
 <li id="micropost-
   <%= micropost.id %>
   ">
-    
-  <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   
-  <span class="user">
-    <%= link_to micropost.user.name, micropost.user %>
-  </span>
-  <span class="content">
-    <%= micropost.content %>
-  </span>
-  <span class="timestamp">
-    Posted 
-    <%= time_ago_in_words(micropost.created_at) %>
-    ago.
+  <% if micropost.retweet_from_id.present? %> <!-- retweetの場合 -->
+    <div class="alert alert-info">
+      <%= micropost.user.name%>
+      さんがリツイートしました。
+    </div>
+    <%= link_to gravatar_for(micropost.user, size: 50), micropost.retweet_from.user %>
+    <span class="user">
+      <%= link_to micropost.retweet_from.user.name, micropost.retweet_from.user %>
+    </span>
+    <span class="content">
+      <%= micropost.retweet_from.content %>
+    </span>
+      <%= image_tag micropost.retweet_from.image.url, class:"img-responsive" %>
+    <span class="timestamp">
+      Posted 
+      <%= time_ago_in_words(micropost.retweet_from.created_at) %>
+      前
+    </span>
     
-    <% if current_user == micropost.user %>
-      <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
-    <% end %>
-  </span>
+  <% else %> <!-- retweetではない普通のmicropostの場合 -->
+    <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+    
+    <span class="user">
+      <%= link_to micropost.user.name, micropost.user %>
+    </span>
+    <span class="content">
+      <%= micropost.content %>
+    </span>
+      <%= image_tag micropost.image.url, class:"img-responsive" %>
+    <span class="timestamp">
+      Posted 
+      <%= time_ago_in_words(micropost.created_at) %>
+      前
+      
+      <% if current_user == micropost.user %>
+        <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
+      <% end %>
+    </span>
+  <% end %>
 </li>

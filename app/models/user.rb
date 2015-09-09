@@ -21,11 +21,6 @@ class User < ActiveRecord::Base
                                     dependent:   :destroy
     has_many :follower_users, through: :follower_relationships, source: :follower
     
-    has_many :retweet_relationships, class_name: "Retweet",
-                                     foreign_key: "retweet_user_id",
-                                     dependent: :destroy
-    has_many :retweet_posts, through: :retweet_relationships, source: :retweet_post
-    
   # follow and unfollow
   def follow(other_user)
     following_relationships.create(followed_id: other_user.id)
@@ -42,15 +37,6 @@ class User < ActiveRecord::Base
   # timeline
   def feed_items
     Micropost.where(user_id: following_user_ids + [self.id])
-  end
-  
-  # retweet create and destroy
-  def retweet(micropost)
-    retweet_relationships.create(retweet_post_id: micropost.id)
-  end
-  
-  def destroy_retweet(micropost)
-    retweet_relationships.find_by(retweet_post_id: micropost.id).destroy
   end
   
 end
