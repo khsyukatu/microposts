@@ -4,6 +4,32 @@
       <section class="user_info">
         <%= render "shared/user_info" %>
       </section>
+      <div class="row">
+        <div class="col-md-6">
+          <%= link_to user_followings_path(current_user) do %>
+            <div class="panel panel-primary text-center">
+              <div class="panel-heading">
+                <h3 class="panel-title">following</h3>
+              </div>
+              <div class="panel-body">
+                <%= current_user.following_users.size %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <%= link_to user_followers_path(current_user) do %>
+            <div class="panel panel-primary text-center">
+              <div class="panel-heading">
+                <h3 class="panel-title">follower</h3>
+              </div>
+              <div class="panel-body">
+                <%= current_user.follower_users.size %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
       <section class="micropost_form">
         <%= render 'shared/micropost_form' %>
       </section>

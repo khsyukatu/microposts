@@ -35,9 +35,20 @@
       Posted 
       <%= time_ago_in_words(micropost.created_at) %>
       前
-      
       <% if current_user == micropost.user %>
         <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
+      <% else %>
+        <% unless current_user.microposts.where(retweet_from_id: micropost.id).present? %>
+          <%= form_for(Micropost.new) do |f| %>
+            <%= f.hidden_field :retweet_from_id ,value: micropost.id %>
+            <%= f.submit "retweet", class:"btn btn-xs btn-info" %>
+          <% end %>
+        <% else%>
+          <%= form_for(Micropost.new) do |f| %>
+            <%= f.hidden_field :retweet_from_id ,value: micropost.id %>
+            <%= f.submit "already retweet", class:"btn btn-xs btn-info", disabled: true %>
+          <% end %>
+        <% end %>
       <% end %>
     </span>
   <% end %>
