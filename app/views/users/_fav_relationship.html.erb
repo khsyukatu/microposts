@@ -1,0 +1,12 @@
+<% if current_user.fav_relationships.where(fav_tweet_id: micropost.id).present? %>
+  <%= form_for(current_user.fav_relationships.find_by(fav_tweet_id: micropost.id), html: { method: :delete}) do |f| %>
+    <%= hidden_field_tag :fav_tweet_id, micropost.id %>
+    <%= f.submit "お気に入りから削除", class: "btn btn-xs btn-danger" %>
+  <% end %>
+  
+<% else %>
+  <%= form_for(current_user.fav_relationships.build) do |f| %>
+      <%= hidden_field_tag :fav_tweet_id, micropost.id %>
+    <%= f.submit "お気に入り", class: "btn btn-xs btn-warning" %>
+  <% end %>
+<% end %>

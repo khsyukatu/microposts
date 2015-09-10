@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     get 'followings' => "users#followings"
     get 'followers' => "users#followers"
+    get 'fav_tweets' => "users#fav_tweets"
   end
   
   resources :users
   resources :microposts
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :fav_relationships, only: [:create, :destroy]
 end

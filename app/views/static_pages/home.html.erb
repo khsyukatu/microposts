@@ -5,7 +5,7 @@
         <%= render "shared/user_info" %>
       </section>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <%= link_to user_followings_path(current_user) do %>
             <div class="panel panel-primary text-center">
               <div class="panel-heading">
@@ -17,7 +17,7 @@
             </div>
           <% end %>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <%= link_to user_followers_path(current_user) do %>
             <div class="panel panel-primary text-center">
               <div class="panel-heading">
@@ -25,6 +25,18 @@
               </div>
               <div class="panel-body">
                 <%= current_user.follower_users.size %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+         <div class="col-md-4">
+          <%= link_to user_fav_tweets_path(current_user) do %>
+            <div class="panel panel-primary text-center">
+              <div class="panel-heading">
+                <h3 class="panel-title">fav</h3>
+              </div>
+              <div class="panel-body">
+                <%= current_user.fav_tweets.size %>
               </div>
             </div>
           <% end %>

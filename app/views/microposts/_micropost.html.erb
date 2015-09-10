@@ -51,5 +51,8 @@
         <% end %>
       <% end %>
     </span>
+    <div id="fav_relationship_<%= micropost.id %>">
+      <%= render partial: "users/fav_relationship", locals: { micropost: micropost } %>
+    </div>
   <% end %>
 </li>

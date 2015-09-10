@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
                                     dependent:   :destroy
     has_many :follower_users, through: :follower_relationships, source: :follower
     
+    has_many :fav_relationships
+    has_many :fav_tweets, :class_name => "Micropost", :foreign_key => "fav_tweet_id", through: :fav_relationships
+    
   # follow and unfollow
   def follow(other_user)
     following_relationships.create(followed_id: other_user.id)
@@ -40,4 +43,13 @@ class User < ActiveRecord::Base
     Micropost.where(user_id: following_user_ids + [self.id])
   end
   
+  # fav_tweets
+  def fav_tweet(micropost)
+    fav_relationships.create(fav_tweet_id: micropost.id)
+  end
+  
+  def remove_fav_tweet(micropost)
+    fav_relationships.find_by(fav_tweet_id: micropost.id).destroy
+  end
+    
 end
