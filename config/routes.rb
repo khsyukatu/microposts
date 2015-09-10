@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   
   resources :users
   resources :microposts
+  post "microposts/retweet"
+  
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :fav_relationships, only: [:create, :destroy]

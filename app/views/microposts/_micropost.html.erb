@@ -39,12 +39,12 @@
         <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
       <% else %>
         <% unless current_user.microposts.where(retweet_from_id: micropost.id).present? %>
-          <%= form_for(Micropost.new) do |f| %>
+          <%= form_for(@micropost, :url => {:controller => "microposts",  :action => 'retweet'}) do |f| %>
             <%= f.hidden_field :retweet_from_id ,value: micropost.id %>
             <%= f.submit "retweet", class:"btn btn-xs btn-info" %>
           <% end %>
         <% else%>
-          <%= form_for(Micropost.new) do |f| %>
+          <%= form_for(@micropost, :url => {:controller => "microposts",  :action => 'retweet'}) do |f| %>
             <%= f.hidden_field :retweet_from_id ,value: micropost.id %>
             <%= f.submit "already retweet", class:"btn btn-xs btn-info", disabled: true %>
           <% end %>

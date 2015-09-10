@@ -5,7 +5,7 @@ class Micropost < ActiveRecord::Base
   
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }, if: "retweet_from_id.nil?"
-  validates_uniqueness_of :retweet_from_id, :scope => :user_id
+  validates_uniqueness_of :retweet_from_id, :scope => :user_id, unless: "retweet_from_id.nil?"
   
   mount_uploader :image, ImageUploader
   
